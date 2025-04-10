@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIG-WEB Shifa Anadya Humaira</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1818/1818401.png" sizes="96x96" type="image/png"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body {transition: background-color 0.5s ease;}
+    .top-side-text, .bottom-side-text {background-color: #d9e6f2; padding: 12px; text-align: center; font-size: 14px; font-weight: bold;}
+    .container {display: flex; min-height: 100vh;}
+    .sidebar {width: 220px; background-color: #f1f1f1;}
+    ul {list-style-type: none; padding: 0; margin: 0;}
+    li a {display: block; padding: 12px 20px; color: #333; text-decoration: none;}
+    li a:hover {background-color: #7a91a8; color: #fff;}
+    .content {flex: 1; padding: 20px;}
+    table {border-collapse: collapse; width: 100%; margin-top: 20px;}
+    th, td {border: 1px solid #000; padding: 8px; text-align: left;}
+    .link-box, .gallery {text-align: center; margin-top: 30px;}
+    .link-box a {font-size: 16px; color: #2c3e50; text-decoration: none; font-weight: bold; padding: 10px 24px; border: 2px solid #2c3e50; border-radius: 10px; transition: 0.3s; background-color: #ffffff;}
+    .link-box a:hover {background-color: #2c3e50; color: white;}
+    .gallery img {width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+    .desc {margin-top: 10px; font-size: 14px; color: #555;}
+    .toast {visibility: hidden; min-width: 250px; margin-left: -125px; background-color: #2c3e50; color: #fff; text-align: center; border-radius: 10px; padding: 12px; position: fixed; z-index: 1; left: 50%; bottom: 30px; font-size: 15px; opacity: 0; transition: opacity 0.5s, bottom 0.5s;}
+    .toast.show {visibility: visible; opacity: 1; bottom: 50px;}
+    button {padding: 8px 16px; margin: 5px; border: none; border-radius: 8px; background-color: #2c3e50; color: white; cursor: pointer; font-weight: bold;}
+    button:hover {background-color: #7a91a8;}
+    .tab-content {display: none;}
+    .tab-content.active {display: block;}
+  </style>
+</head>
+<body>
+
+  <div class="top-side-text">Praktikum Sistem Informasi Geografis pada Program Studi Sarjana Teknik Geodesi</div>
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li><a href="#" onclick="tampilkanTab('sejarah')">Sejarah Teknik Geodesi</a></li>
+        <li><a href="#" onclick="tampilkanTab('lokasi')">Peta Lokasi</a></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      
+      <!-- Tab: Sejarah -->
+      <div id="sejarah" class="tab-content active">
+        <h1><b>Teknik Geodesi</b></h1>
+        <hr>
+        <p style="text-align: justify; font-family: Segoe UI">
+          Geodesy berasal dari bahasa Yunani, <i style="color: red;">Geo (γη)</i> = bumi dan 
+          <i style="color: blue;">daisia / daiein (δαιω)</i> = membagi. Kata geodaisia atau geodeien berarti membagi bumi. Menurut IAG (1979), Teknik Geodesi adalah disiplin ilmu yang mempelajari pengukuran dan perepresentasian Bumi dan benda langit lainnya, termasuk medan gaya beratnya, dalam ruang tiga dimensi yang berubah dengan waktu.
+        </p>
+
+        <h2><b>Mata Kuliah Sistem Informasi Geografis (SIG) Web</b></h2>
+        <hr>
+        <p style="text-align: justify; font-family: Segoe UI">
+          Dalam program studi sarjana pada DTGD, tersedia mata kuliah Sistem Informasi Geografis (SIG) Web yang berorientasi pada penyajian informasi geospasial dalam sebuah laman web...
+        </p>
+
+        <!-- Tabel dan Validasi Password tetap sama -->
+        <h4 style="text-align: center;">Akses Hasil Publikasi Praktikum</h4>
+        <table>
+          <tr>
+            <th>Topik Praktikum</th>
+            <th>Kendala</th>
+            <th>Link</th>
+          </tr>
+          <tr><td>CV</td><td>Kesulitan publikasi</td><td><a href="https://shfndyhmr.github.io/shifaanadyahumaira/">M5</a></td></tr>
+          <tr><td>Leaflet Biasa</td><td>Modifikasi website</td><td><a href="https://shfndyhmr.github.io/M6PrakSIGWeb/">M6</a></td></tr>
+          <tr><td>Leaflet SIG</td><td>shp salah</td><td><a href="https://shfndyhmr.github.io/M7PrakSIGWeb/">M7</a></td></tr>
+        </table>
+
+        <h2><b>Bagian Validasi Password</b></h2>
+        <script>
+          function cekLogin() {
+            let pass = document.querySelector("#password").value;
+            let pesan = document.querySelector("#cek");
+            if (pass === "sss") {
+              pesan.textContent = "Login Berhasil, Silakan Masuk!";
+              pesan.style.color = "green";
+            } else {
+              pesan.textContent = "Peringatan: Sandi Masukan Salah!";
+              pesan.style.color = "red";
+            }
+          }
+        </script>
+        <label>Kata Sandi:</label>
+        <input type="password" id="password"><br><br>
+        <button onclick="cekLogin()">Submit</button>
+        <p id="cek"></p>
+
+        <div style="margin-top: 20px;">
+          <button onclick="sapa()">Sapa Pengunjung</button>
+          <button onclick="ubahWarna()">Ubah Tampilan Peta 🌍</button>
+        </div>
+
+        <div class="gallery">
+          <img src="Dosen DTGD Berpose di depan Gedung Sekip.jpg" alt="Gedung Sekip" title="Sekip UGM">
+          <div class="desc">Dosen DTGD Berpose di depan Gedung Sekip</div>
+        </div>
+      </div>
+
+      <!-- Tab: Peta -->
+      <div id="lokasi" class="tab-content">
+        <h2><b>Peta Lokasi</b></h2>
+        <div id="map" style="height: 500px; width: 100%; border-radius: 10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-side-text">&copy; Shifa Anadya Humaira</div>
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const warnaGeospasial = ["#e0f7fa", "#dcedc8", "#ffe0b2", "#f0f4c3", "#c8e6c9"];
+    let indexWarna = 0;
+    function ubahWarna() {
+      document.body.style.backgroundColor = warnaGeospasial[indexWarna];
+      indexWarna = (indexWarna + 1) % warnaGeospasial.length;
+    }
+
+    function sapa() {
+      const toast = document.getElementById("toast");
+      toast.textContent = "Selamat datang di dunia Geodesi! 📡 - Shifa";
+      toast.className = "toast show";
+      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3500);
+    }
+
+    let mapInitialized = false;
+    function tampilkanTab(id) {
+      const tabs = document.querySelectorAll(".tab-content");
+      tabs.forEach(tab => tab.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+
+      if (id === "lokasi" && !mapInitialized) {
+        var map = L.map('map').setView([-7.7707, 110.3771], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([-7.7707, 110.3771]).addTo(map).bindPopup("Fakultas Teknik");
+        L.marker([-7.7666, 110.37744]).addTo(map).bindPopup("Fakultas Geografi");
+        L.marker([-7.76806, 110.37608]).addTo(map).bindPopup("Fakultas Biologi");
+        L.marker([-7.76806, 110.37659]).addTo(map).bindPopup("Fakultas MIPA");
+        L.marker([-7.76677, 110.37960]).addTo(map).bindPopup("Fakultas Agro");
+
+        mapInitialized = true;
+      }
+    }
+
+  </script>
+</body>
+</html>
